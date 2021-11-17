@@ -35,7 +35,7 @@ class Reaction(object):
             spec.conformer.E0 = thermo.conformer.E0
             for mode in spec.conformer.modes:
                 if isinstance(mode, HarmonicOscillator):
-                    frequencies = mode.frequencies.value_si
+                    frequencies =  [round((thermo.mode_dict[key]['K'] ** 0.5) / (2 * np.pi * constants.c * 100), 2) for key in thermo.mode_dict.keys()]
                     mode.frequencies = (frequencies * self.frequency_scale_factor, "cm^-1")
             # only leave HarmonicOscillator in QM/MM calculation
             if thermo.is_QM_MM_INTERFACE:
